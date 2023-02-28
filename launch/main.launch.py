@@ -9,6 +9,9 @@ def generate_launch_description():
             executable='pub',
             parameters=[
                 {'num': 600}
+            ],
+            remappings=[
+                ('/pub_topic', '/remapped_topic')
             ]
         )
     ])
