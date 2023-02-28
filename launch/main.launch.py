@@ -6,6 +6,7 @@ def generate_launch_description():
     return LaunchDescription([
         Node(
             package='arguments',
+            name='remapped_name',
             executable='pub',
             parameters=[
                 {'num': 600}
