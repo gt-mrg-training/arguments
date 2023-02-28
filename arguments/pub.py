@@ -7,6 +7,8 @@ class PubNode(Node):
     def __init__(self):
         super().__init__('pub')
 
+        self.declare_parameter(name='num', value=10)
+
         self.pub = self.create_publisher(
             Int32,
             '/pub_topic',
@@ -16,7 +18,7 @@ class PubNode(Node):
         self.create_timer(1.0, self.execute)
     
     def execute(self):
-        num = 10
+        num = self.get_parameter('num').value
 
         msg = Int32(data=num)
 
