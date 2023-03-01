@@ -1,7 +1,12 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
+from launch.substitutions import LaunchConfiguration
+from launch.conditions import IfCondition
 
 def generate_launch_description():
+
+    use_pub1_config = LaunchConfiguration('use_pub1', default=True)
+    use_pub2_config = LaunchConfiguration('use_pub2', default=True)
 
     return LaunchDescription([
         Node(
@@ -13,7 +18,8 @@ def generate_launch_description():
             ],
             remappings=[
                 ('/pub_topic', '/pub1_topic')
-            ]
+            ],
+            condition=IfCondition(use_pub1_config)
         ),
         Node(
             package='arguments',
@@ -24,6 +30,7 @@ def generate_launch_description():
             ],
             remappings=[
                 ('/pub_topic', '/pub2_topic')
-            ]
+            ],
+            condition=IfCondition(use_pub2_config)
         )
     ])
