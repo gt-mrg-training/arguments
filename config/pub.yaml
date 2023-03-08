@@ -1,0 +1,10 @@
+
+pub1:
+  ros__parameters:
+    num: 600
+    timer_delay: 2
+
+pub2:
+  ros__parameters:
+    num: 30
+    timer_delay: 0.5

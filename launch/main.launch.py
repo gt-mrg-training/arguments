@@ -2,11 +2,17 @@ from launch import LaunchDescription
 from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration
 from launch.conditions import IfCondition
+from ament_index_python.packages import get_package_share_directory 
+import os
 
 def generate_launch_description():
 
     use_pub1_config = LaunchConfiguration('use_pub1', default=True)
     use_pub2_config = LaunchConfiguration('use_pub2', default=True)
+
+    pkg_share = get_package_share_directory('arguments')
+
+    pub_config_file = os.path.join(pkg_share, 'config', 'pub.yaml')
 
     return LaunchDescription([
         Node(
@@ -14,8 +20,7 @@ def generate_launch_description():
             executable='pub',
             name='pub1',
             parameters=[
-                {'num': 600},
-                {'timer_delay': 2}
+                pub_config_file
             ],
             remappings=[
                 ('/pub_topic', '/pub1_topic')
@@ -27,8 +32,7 @@ def generate_launch_description():
             executable='pub',
             name='pub2',
             parameters=[
-                {'num': 30},
-                {'timer_delay': 0.5}
+                pub_config_file
             ],
             remappings=[
                 ('/pub_topic', '/pub2_topic')
