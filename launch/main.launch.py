@@ -14,7 +14,8 @@ def generate_launch_description():
             executable='pub',
             name='pub1',
             parameters=[
-                {'num': 600}
+                {'num': 600},
+                {'timer_delay': 2}
             ],
             remappings=[
                 ('/pub_topic', '/pub1_topic')
@@ -26,7 +27,8 @@ def generate_launch_description():
             executable='pub',
             name='pub2',
             parameters=[
-                {'num': 30}
+                {'num': 30},
+                {'timer_delay': 0.5}
             ],
             remappings=[
                 ('/pub_topic', '/pub2_topic')
